@@ -1,0 +1,16 @@
+bootloader --ptable gpt
+
+# 1) Boot (~64 MiB, FAT)
+part /boot --source bootimg-partition \
+     --fstype=vfat --label boot --size=64M
+
+# 2) Rootfs A (~900 MiB)
+part / --source rootfs \
+     --fstype=ext4 --label rootfsA --size=900M
+
+# 3) Rootfs B (~900 MiB)
+part /rootfsB --source rootfs \
+     --fstype=ext4 --label rootfsB --size=900M
+
+# 4) Data (~128 MiB)
+part /data --fstype=ext4 --label data --size=128M
